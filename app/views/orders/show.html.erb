@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Order Receipt</h1>
+  
+  <div class="receipt">
+    <p><strong>Order ID:</strong> #<%= @order.id %></p>
+    <p><strong>Customer:</strong> <%= @order.customer_name %></p>
+    <p><strong>Total Price:</strong> <%= number_to_currency(@order.total_price, unit: "IDR ", separator: ",", delimiter: ".") %></p>
+    <p><strong>Status:</strong> <span class="status-success">Placed</span></p>
+  </div>
+
+  <%= link_to "Place Another Order", new_order_path, class: "btn-secondary" %>
+</div>
+
+<style>
+  .container { max-width: 600px; margin: 2rem auto; font-family: sans-serif; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
+  .receipt { background: #f4f4f4; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; }
+  .status-success { color: green; font-weight: bold; }
+  .btn-secondary { display: inline-block; padding: 0.5rem 1rem; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; }
+</style>

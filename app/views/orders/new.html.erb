@@ -1,0 +1,39 @@
+<div class="container" data-controller="order">
+  <h1>Place New Order</h1>
+
+  <%= form_with url: orders_path, local: true do |f| %>
+    <div class="field">
+      <%= f.label :customer_name %><br>
+      <%= f.text_field :customer_name, required: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :item_id, "Select Product" %><br>
+      <%= f.select :item_id, options_from_collection_for_select(@items, :id, :name), {}, 
+                   { data: { order_target: "item", action: "change->order#calculate" } } %>
+    </div>
+
+    <div class="field">
+      <%= f.label :quantity %><br>
+      <%= f.number_field :quantity, value: 1, min: 1, 
+                         data: { order_target: "quantity", action: "input->order#calculate" } %>
+    </div>
+
+    <div class="price-display">
+      <strong>Estimated Total:</strong> 
+      <span data-order-target="total">IDR 0,00</span>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Place Order", class: "btn" %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .container { max-width: 600px; margin: 2rem auto; font-family: sans-serif; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
+  .field { margin-bottom: 1rem; }
+  input, select { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+  .price-display { margin: 1rem 0; font-size: 1.2rem; background: #f9f9f9; padding: 1rem; border-left: 4px solid #007bff; }
+  .btn { background: #007bff; color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 4px; cursor: pointer; }
+</style>
