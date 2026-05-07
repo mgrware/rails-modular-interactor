@@ -1,24 +1,48 @@
-# README
+# Rails DDD Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README provides the necessary steps to get the application up and running.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+- Docker
+- Docker Compose
 
-* System dependencies
+## How to run the project locally
 
-* Configuration
+1. **Clone the repository** (if you haven't already):
+   ```bash
+   git clone <repository-url>
+   cd rails-dd
+   ```
 
-* Database creation
+2. **Build and start the services:**
+   We use Docker Compose to manage the application and its dependencies (like PostgreSQL).
+   Run the following command to build the image and start the containers:
+   ```bash
+   docker-compose up --build
+   ```
 
-* Database initialization
+   This command will automatically:
+   - Build the web container
+   - Start the PostgreSQL database
+   - Prepare the database (`bundle exec rails db:prepare`)
+   - Start the Rails server on port 3000
 
-* How to run the test suite
+3. **Access the application:**
+   Once the containers are running, open your web browser and navigate to:
+   [http://localhost:3000](http://localhost:3000)
 
-* Services (job queues, cache servers, search engines, etc.)
+## Stopping the application
 
-* Deployment instructions
+To stop the running containers, press `Ctrl + C` in the terminal where Docker Compose is running.
+Alternatively, you can run the following command in another terminal window:
+```bash
+docker-compose down
+```
 
-* ...
+## Running the test suite
+
+To run the tests inside the Docker container, use the following command:
+```bash
+docker-compose exec web bundle exec rails test
+```
