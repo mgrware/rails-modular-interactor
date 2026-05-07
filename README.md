@@ -1,4 +1,4 @@
-# Rails DDD Project
+# Rails Modular Monolith With interactor Pattern Project
 
 This README provides the necessary steps to get the application up and running.
 
